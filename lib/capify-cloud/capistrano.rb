@@ -13,19 +13,6 @@ Capistrano::Configuration.instance(:must_exist).load do
       capify_cloud.display_instances
     end
 
-    desc "Deregisters instance from its ELB"
-    task :deregister_instance do
-      instance_name = variables[:logger].instance_variable_get("@options")[:actions].first
-      capify_cloud.deregister_instance_from_elb(instance_name)
-    end
-
-    desc "Registers an instance with an ELB."
-    task :register_instance do
-      instance_name = variables[:logger].instance_variable_get("@options")[:actions].first
-      load_balancer_name = variables[:logger].instance_variable_get("@options")[:vars][:loadbalancer]
-      capify_cloud.register_instance_in_elb(instance_name, load_balancer_name)
-    end
-
     task :date do
       run "date"
     end

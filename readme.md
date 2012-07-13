@@ -73,23 +73,6 @@ will run the date command on all server's tagged with the web role
 Running
 
 ```ruby
-cap server-1 cloud:register_instance -s loadbalancer=elb-1
-```
-
-will register server-1 to be used by elb-1
-
-Running
-
-```ruby
-cap server-1 cloud:deregister_instance
-```
-
-will remove server-1 from whatever instance it is currently
-registered against.
-
-Running
-
-```ruby
 cap cloud:status
 ```
 
@@ -161,27 +144,21 @@ The yml file needs to look something like this:
   
 ```ruby
 :cloud_providers: ['AWS', 'Brightbox']
-
+:project_tag: "YOUR APP NAME"
+  
 :AWS:
   :aws_access_key_id: "YOUR ACCESS KEY"
   :aws_secret_access_key: "YOUR SECRET"
-  :params:
-    :region: 'eu-west-1'
-  :load_balanced: true
-  :project_tag: "YOUR APP NAME"
+  :regions: 'eu-west-1'
   
 :Brightbox:
   :brightbox_client_id: "YOUR CLIENT ID"
   :brightbox_secret: "YOUR SECRET"
 ```
-aws_access_key_id, aws_secret_access_key, and region are required for AWS. Other settings are optional.
+aws_access_key_id, aws_secret_access_key, and region are required for AWS.
 brightbox_client_id and brightbox_secret: are required for Brightbox.
+Other settings are optional.
 If you do not specify a cloud_provider, AWS is assumed.
-
-If :load_balanced is set to true, the gem uses pre and post-deploy
-hooks to deregister the instance, reregister it, and validate its
-health.
-:load_balanced only works for individual instances, not for roles.
 
 The :project_tag parameter is optional. It will limit any commands to
 running against those instances with a "Project" tag set to the value
