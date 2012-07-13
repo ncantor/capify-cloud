@@ -166,8 +166,8 @@ running against those instances with a "Project" tag set to the value
 
 ## Development
 
-Source hosted at [GitHub](http://github.com/ncantor/capify-cloud).
-Report Issues/Feature requests on [GitHub Issues](http://github.com/ncantor/capify-cloud/issues).
+Source hosted at [GitHub](http://github.com/forward/capify-cloud).
+Report Issues/Feature requests on [GitHub Issues](http://github.com/forward/capify-cloud/issues).
 
 ### Note on Patches/Pull Requests
 
@@ -181,4 +181,4 @@ Report Issues/Feature requests on [GitHub Issues](http://github.com/ncantor/capi
 
 ## Copyright
 
-Original version: Copyright (c) 2012 Forward. See [LICENSE](https://github.com/ncantor/capify-cloud/blob/master/LICENSE) for details.
+Original version: Copyright (c) 2012 Forward. See [LICENSE](https://github.com/forward/capify-cloud/blob/master/LICENSE) for details.
