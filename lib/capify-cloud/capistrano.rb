@@ -32,13 +32,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       exec(command)
     end
   end
-  
-  namespace :deploy do
-    before "deploy", "cloud:deregister_instance"
-    after "deploy", "cloud:register_instance"
-    after "deploy:rollback", "cloud:register_instance"
-  end
-    
+      
   def cloud_roles(*roles)
     server_name = variables[:logger].instance_variable_get("@options")[:actions].first unless variables[:logger].instance_variable_get("@options")[:actions][1].nil?
     
