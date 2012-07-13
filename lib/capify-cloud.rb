@@ -17,7 +17,7 @@ class CapifyCloud
     else
       raise ArgumentError, "Invalid cloud_config: #{cloud_config.inspect}"
     end
-
+  
     @cloud_providers = @cloud_config[:cloud_providers]
     @instances = []
     @cloud_providers.each do |cloud_provider|
@@ -29,20 +29,16 @@ class CapifyCloud
           regions.each do |region|
             config.delete(:region)
             config[:region] = region
-
-            servers = Fog::Compute.new(config).servers
-            servers.each do |server|
-              @instances << server if server.ready?
-            end
+            populate_instances(config)
           end
-        else
-          servers = Fog::Compute.new(config).servers
-          servers.each do |server|
-            @instances << server if server.ready?
-        end
+        else populate_instances(config)
       end
     end
   end 
+  
+  def populate_instances(config)
+    Fog::Compute.new(config).servers.each {|server| @instances << server if server.ready? }
+  end
   
   def determine_regions(cloud_provider = 'AWS')
     regions = @cloud_config[cloud_provider.to_sym][:regions]
