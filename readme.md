@@ -82,7 +82,7 @@ will list the currently running servers and their associated details
 Running
 
 ```ruby
-cap cloud:ssh -s cloud_instance=<instance name/id from cloud_status>
+cap cloud:ssh -s cloud_instance=<instance name/id from cloud:status>
 ```
 
 will launch ssh using the user and port specified in your configuration.
