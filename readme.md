@@ -82,11 +82,11 @@ will list the currently running servers and their associated details
 Running
 
 ```ruby
-cap cloud:ssh #
+cap cloud:ssh -s cloud_instance=<instance name/id from cloud_status>
 ```
 
 will launch ssh using the user and port specified in your configuration.
-The # argument is the index of the server to ssh into. Use the 'cloud:status'
+The cloud_instance argument is the index of the server to ssh into. Use the 'cloud:status'
 command to see the list of servers with their indices.
 
 More options
