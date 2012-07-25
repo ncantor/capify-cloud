@@ -22,14 +22,19 @@ Capistrano::Configuration.instance(:must_exist).load do
       puts capify_cloud.server_names.sort
     end
     
-    desc "Allows ssh to instance by id. cap ssh <INSTANCE NAME>"
+    desc "Allows ssh to instance by id. cap ssh -s cloud_instance=<INSTANCE NAME>"
     task :ssh do
-      server = variables[:logger].instance_variable_get("@options")[:actions][1]
+      server = fetch(:cloud_instance, false)
       instance = numeric?(server) ? capify_cloud.desired_instances[server.to_i] : capify_cloud.get_instance_by_name(server)
-      port = ssh_options[:port] || 22 
-      command = "ssh -p #{port} #{user}@#{instance.contact_point}"
-      puts "Running `#{command}`"
-      exec(command)
+	  if !instance.nil?
+      	port = ssh_options[:port] || 22 
+      	command = "ssh -p #{port} #{user}@#{instance.contact_point}"
+      	puts "Running `#{command}`"
+      	exec(command)
+	  else
+		puts "Unable to find instance"
+		puts "Usage:\n  cap cloud:ssh -s cloud_instance=<instance name/id from cloud:status>"
+	  end
     end
   end
       
