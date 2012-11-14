@@ -28,6 +28,11 @@ Capistrano::Configuration.instance(:must_exist).load do
       instance = numeric?(server) ? capify_cloud.desired_instances[server.to_i] : capify_cloud.get_instance_by_name(server)
       port = ssh_options[:port] || 22 
       command = "ssh -p #{port} #{user}@#{instance.contact_point}"
+      if ssh_options[:keys]
+        for key in ssh_options[:keys]
+          command += " -i #{key}"
+        end
+      end
       puts "Running `#{command}`"
       exec(command)
     end
